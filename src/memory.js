@@ -10,14 +10,10 @@ class MemoryGame {
 
   shuffleCards(array) {
     // ... write your code here
-    if(!this.cards || this.cards.length === 0){
+    this.cards.sort(() => Math.random () - 0.5);
+    if(this.cards.length === 0) {
       return undefined;
     }
-    for (let i = this.cards.length -1; i > 0; i --) {
-      const randomCard = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[randomCard]] = [this.cards[randomCard], this.cards[i]];
-    } 
-    return this.cards;
   }
 
 
@@ -26,25 +22,30 @@ class MemoryGame {
   checkIfPair(card1, card2) {
     // ... write your code here
     this.pairsClicked++;
-
-    if (card1.getAttribute('data-card-name') === card2.getAttribute('data-card-name')) {
-      this.pairsGuessed++;
-      return true;
-    } else {
-      return false;
+      if(card1 === card2) {
+        this.pairsGuessed++;
+        return true;
+      } else {
+        return false;
+      }
     }
-  }
+  
 
 
 
   checkIfFinished() {
-    // ... write your code here
-    const totalCardPairs = this.cards.length /2;
-
-    if(this.pairsGuessed === totalCardPairs){
+    //... write your code here
+    if(this.pairsGuessed === this.cards.length / 2){
       return true;
     } else {
       return false;
     }
   }
 }
+  
+  
+  
+  
+  
+  
+  
